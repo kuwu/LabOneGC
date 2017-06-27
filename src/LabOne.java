@@ -6,8 +6,8 @@ import java.util.Scanner;
 public class LabOne {
     Scanner scnr = new Scanner(System.in); // create a scanner object
 
+    public void check() {
 
-    public void check(){
         System.out.println("Welcome to Grand Circus' Room Detail Generator!\n\n" + "Please enter the length: ");
         double length = scnr.nextDouble();
         System.out.println("Please enter the width: ");
@@ -27,31 +27,45 @@ public class LabOne {
         System.out.println("The area of the Grand Circus Room is: " + area);
         System.out.println("The perimeter of the Grand Circus Room is: " + perimeter);
         System.out.println("The volume of the Grand Circus Room is: " + volume + "\n");
-
-
-
-
     }
 
-    public static void main (String [] args){
-        Scanner scnr = new Scanner(System.in);
-        char userChar = '_';
-        String userInput;
+    public static char getUserInput() {
+        Scanner scnr = new Scanner(System.in); // create a scanner object
+        System.out.println("Enter 'y' to continue or 'n' to quit");
+        // cast uppercase to lowercase
+        String userInput = scnr.next().toLowerCase();
 
+        return userInput.charAt(0);
+    }
 
-        // loop allows user to input numerous numbers using 'y' until the user
-        // types 'q' to quit
-        while (userChar != 'n') {
-
-
+    public  static void printUserInfo() {
         LabOne roomSize = new LabOne();
         roomSize.check();
+    }
 
-            System.out.println("Enter 'y' to continue or 'n' to quit");
-            userInput = scnr.next();
-            userChar = userInput.charAt(0);
+    public static void main(String[] args) {
+        char userChar;
+        boolean value = true;
 
-        }
+
+        // runs room check one time before continue/check loop
+        printUserInfo();
+
+
+        // loop allows user to continue using 'y or Y' until the user
+        // types 'n or N' to quit    validates for 'y or Y' and 'n or N'
+        do {
+            userChar = getUserInput();
+            if (userChar == 'y') {
+                printUserInfo();
+            } else if (userChar == 'n') {
+                value = false;
+            } else {
+                System.out.println(userChar + " is not y or n please re-enter");
+            }
+
+        } while (value);
+
 
         // Informing the user the program has ended
         System.out.print("Room Detail Generator Finished");
